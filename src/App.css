@@ -1,5 +1,22 @@
 /* Additional custom styles for the app */
 
+/* Colorful gradient backgrounds */
+.bg-gradient-vibrant {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.bg-gradient-warm {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.bg-gradient-cool {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.bg-gradient-sunset {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
 /* Flexbox utilities not covered in index.css */
 .flex-wrap { flex-wrap: wrap; }
 .flex-col { flex-direction: column; }
@@ -20,18 +37,51 @@
   transform: rotate(180deg);
 }
 
-/* Additional hover effects */
-button:hover {
+/* Additional hover effects - more specific and less disruptive */
+button:hover:not(.no-hover-transform):not([type="submit"]) {
   transform: translateY(-1px);
 }
 
-button:active {
+button:active:not(.no-hover-transform):not([type="submit"]) {
   transform: translateY(0);
 }
 
-/* Card styling */
+/* Subtle hover effect for submit buttons to prevent layout shift */
+button[type="submit"]:hover {
+  filter: brightness(1.05);
+  transition: filter 0.2s ease;
+}
+
+button[type="submit"]:active {
+  filter: brightness(0.95);
+}
+
+/* Card styling - Enhanced with colorful shadows */
 .bg-white:hover {
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 40px -10px rgba(139, 69, 255, 0.15), 0 10px 20px -5px rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Colorful card variants */
+.card-purple {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.card-pink {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+.card-blue {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+}
+
+.card-orange {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  color: white;
 }
 
 /* Scroll behavior */
@@ -57,7 +107,7 @@ html {
   background: #94a3b8;
 }
 
-/* Loading states */
+/* Loading states - Enhanced with colorful animations */
 @keyframes pulse {
   0%, 100% {
     opacity: 1;
@@ -67,8 +117,70 @@ html {
   }
 }
 
+@keyframes colorfulPulse {
+  0%, 100% {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    opacity: 1;
+  }
+  25% {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    opacity: 0.8;
+  }
+  50% {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    opacity: 0.6;
+  }
+  75% {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    opacity: 0.8;
+  }
+}
+
+@keyframes rainbow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .animate-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-colorful-pulse {
+  animation: colorfulPulse 3s ease-in-out infinite;
+}
+
+.animate-rainbow {
+  background: linear-gradient(270deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff);
+  background-size: 400% 400%;
+  animation: rainbow 3s ease infinite;
+}
+
+/* Colorful button variants */
+.btn-gradient-purple {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient-purple:hover {
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(139, 69, 255, 0.3);
+}
+
+.btn-gradient-pink {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient-pink:hover {
+  background: linear-gradient(135deg, #e879f9 0%, #ec4899 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(236, 72, 153, 0.3);
 }
 
 /* Print styles */

@@ -52,15 +52,6 @@ const Header: React.FC<HeaderProps> = ({ apiHealthy }) => {
           </div>
         </div>
 
-        {/* API Status Indicator */}
-        {!apiHealthy && (
-          <div className="mt-3 flex items-center space-x-2 text-sm">
-            <AlertCircle className="w-4 h-4 text-yellow-600 dark:text-yellow-400" />
-            <span className="text-yellow-600 dark:text-yellow-400">
-              API connection issues detected
-            </span>
-          </div>
-        )}
       </div>
     </header>
   );

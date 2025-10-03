@@ -307,7 +307,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 dark:from-gray-900 dark:via-purple-900 dark:to-blue-900">
       {/* Header */}
       <Header 
         apiHealthy={apiHealthy}
@@ -331,8 +331,8 @@ function App() {
 
           {/* Main Content Area */}
           <main className="flex-1 min-w-0">
-            {/* Flipkart-style Search Header */}
-            <div className="bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-700 dark:to-blue-800 -mx-4 sm:-mx-6 lg:-mx-8 mb-6">
+            {/* Colorful Search Header */}
+            <div className="bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 dark:from-purple-700 dark:via-blue-700 dark:to-pink-700 -mx-4 sm:-mx-6 lg:-mx-8 mb-6 shadow-2xl">
               <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
                 <div className="flex items-center gap-4">
                   {/* Logo/Brand Section */}
@@ -372,7 +372,7 @@ function App() {
                         <button
                           type="submit"
                           disabled={!searchInput.trim()}
-                          className="px-6 py-4 bg-orange-500 hover:bg-orange-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white text-base font-medium rounded-r-md transition-colors shadow-lg flex items-center justify-center"
+                          className="px-6 py-4 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white text-base font-medium rounded-r-md transition-all duration-300 shadow-lg flex items-center justify-center transform hover:scale-105"
                         >
                           <Search className="w-5 h-5" />
                         </button>
@@ -390,21 +390,30 @@ function App() {
                 
                 {/* Popular Searches - Below main search */}
                 <div className="mt-3 flex flex-wrap items-center gap-2">
-                  <span className="text-blue-100 text-xs sm:text-sm">Popular:</span>
-                  {['Technology', 'Healthcare', 'Finance', 'AI Companies', 'Startups'].map((term) => (
-                    <button
-                      key={term}
-                      type="button"
-                      onClick={() => {
-                        setSearchInput(term);
-                        setFilters(prev => ({ ...prev, searchTerm: term }));
-                        setCurrentPage(1);
-                      }}
-                      className="px-2 py-1 text-xs bg-blue-500/20 text-blue-100 rounded hover:bg-blue-500/30 transition-colors border border-blue-400/20"
-                    >
-                      {term}
-                    </button>
-                  ))}
+                  <span className="text-black text-xs sm:text-sm font-bold bg-white/90 px-2 py-1 rounded-md backdrop-blur-sm border border-white/50 shadow-sm">Popular:</span>
+                  {['Technology', 'Healthcare', 'Finance', 'AI Companies', 'Startups'].map((term, index) => {
+                    const colors = [
+                      'bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500',
+                      'bg-gradient-to-r from-green-400 to-blue-400 hover:from-green-500 hover:to-blue-500',
+                      'bg-gradient-to-r from-purple-400 to-pink-400 hover:from-purple-500 hover:to-pink-500',
+                      'bg-gradient-to-r from-blue-400 to-cyan-400 hover:from-blue-500 hover:to-cyan-500',
+                      'bg-gradient-to-r from-pink-400 to-red-400 hover:from-pink-500 hover:to-red-500'
+                    ];
+                    return (
+                      <button
+                        key={term}
+                        type="button"
+                        onClick={() => {
+                          setSearchInput(term);
+                          setFilters(prev => ({ ...prev, searchTerm: term }));
+                          setCurrentPage(1);
+                        }}
+                        className={`px-3 py-1.5 text-xs text-black font-semibold rounded-full transition-all duration-300 border border-white/20 shadow-lg hover:shadow-xl transform hover:scale-105 ${colors[index % colors.length]}`}
+                      >
+                        {term}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -459,20 +468,20 @@ function App() {
 
             {/* Loading State */}
             {loading && (
-              <div className="flex flex-col items-center justify-center py-20 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl border border-blue-200 dark:border-blue-800">
+              <div className="flex flex-col items-center justify-center py-20 bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 dark:from-purple-900/20 dark:via-blue-900/20 dark:to-pink-900/20 rounded-2xl border border-purple-200 dark:border-purple-800 shadow-xl">
                 <div className="relative">
-                  <Loader2 className="w-12 h-12 animate-spin text-blue-600 dark:text-blue-400 mb-6" />
-                  <div className="absolute inset-0 w-12 h-12 rounded-full border-2 border-blue-200 dark:border-blue-700 animate-pulse"></div>
+                  <Loader2 className="w-12 h-12 animate-spin text-transparent bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 bg-clip-text mb-6" />
+                  <div className="absolute inset-0 w-12 h-12 rounded-full border-2 border-purple-200 dark:border-purple-700 animate-rainbow"></div>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Searching Companies</h3>
+                <h3 className="text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">Searching Companies</h3>
                 <p className="text-gray-600 dark:text-gray-300 text-center max-w-md">
                   We're searching through our database to find the best matches for your query...
                 </p>
                 <div className="mt-4 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
                   <div className="flex space-x-1">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                    <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                    <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-blue-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
                   </div>
                   <span>Processing...</span>
                 </div>
@@ -491,7 +500,7 @@ function App() {
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <button
                       onClick={handleRetry}
-                      className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+                      className="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105 shadow-lg"
                     >
                       <AlertCircle className="w-4 h-4" />
                       Try Again
@@ -502,7 +511,7 @@ function App() {
                         setSearchInput('');
                         handleNavigationClick('overview');
                       }}
-                      className="px-6 py-3 border border-red-300 dark:border-red-600 text-red-700 dark:text-red-300 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg font-medium transition-colors"
+                      className="px-6 py-3 border-2 border-red-300 dark:border-red-600 text-red-700 dark:text-red-300 hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 dark:hover:bg-red-900/30 rounded-lg font-medium transition-all duration-300 transform hover:scale-105"
                     >
                       Clear Search
                     </button>
@@ -613,13 +622,13 @@ function App() {
                             setSearchInput('');
                             handleNavigationClick('overview');
                           }}
-                          className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+                          className="px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105 shadow-lg"
                         >
                           Clear Search
                         </button>
                         <button
                           onClick={() => setSearchInput('Technology')}
-                          className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors"
+                          className="px-6 py-2 border-2 border-purple-300 dark:border-purple-600 text-purple-700 dark:text-purple-300 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 dark:hover:bg-purple-900/30 rounded-lg font-medium transition-all duration-300 transform hover:scale-105"
                         >
                           Try "Technology"
                         </button>
