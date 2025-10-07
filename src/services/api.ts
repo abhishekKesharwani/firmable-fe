@@ -7,6 +7,7 @@ const SEARCH_ENDPOINT = '/search/comprehensive';
 // API Request Types
 interface ComprehensiveSearchRequest {
   query: string;
+  searchType?: string;
   filters?: {
     industry?: string[];
     year_founded_d?: {
@@ -62,7 +63,8 @@ const transformApiCompany = (doc: any): Company => {
     tags: doc.tags || [],
     employees: doc.current_employee_estimate_l?.toString() || doc.size_range_s || '50',
     revenue: doc.revenue || 'Not disclosed',
-    status: 'Active'
+    status: 'Active',
+    searchType: doc.searchType || doc.search_type || 'hybrid'
   };
 };
 
@@ -76,6 +78,7 @@ const buildSearchRequest = (
 ): ComprehensiveSearchRequest => {
   const request: ComprehensiveSearchRequest = {
     query: filters.searchTerm || '*',
+    searchType: 'hybrid',
     facetFields: ['industry_s', 'country_s', 'locality_ss'],
     page: page - 1, // Convert to 0-based indexing
     pageSize: pageSize

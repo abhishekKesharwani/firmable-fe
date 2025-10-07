@@ -11,6 +11,7 @@ export interface Company {
   employees: string;
   revenue: string;
   status: string;
+  searchType?: 'lexical' | 'semantic' | 'hybrid';
 }
 
 export interface FilterState {

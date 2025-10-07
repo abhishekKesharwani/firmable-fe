@@ -317,7 +317,9 @@ function App() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex gap-8 py-8">
           {/* Left Navigation - Hidden on mobile, show as dropdown */}
-          <aside className="hidden lg:block w-64 flex-shrink-0">
+          <aside className={`hidden lg:block flex-shrink-0 transition-all duration-300 ${
+            hasSearchBeenPerformed() ? 'w-32' : 'w-64'
+          }`}>
             <div className="sticky top-8">
               <DynamicNavigation
                 facets={facets}
@@ -601,8 +603,8 @@ function App() {
                       </span>
                     </div>
                     
-                    {/* Companies Grid - 2 per row */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Companies Grid - 3 per row */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {companies.map((company: Company) => (
                         <CompanyCard key={company.id} company={company} />
                       ))}
